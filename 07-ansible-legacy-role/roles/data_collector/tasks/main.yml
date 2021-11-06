@@ -1,0 +1,5 @@
+- name: Collect data (pseudo)
+  ansible.builtin.copy:
+    src: "collected-data.yml"
+    dest: "{{ __parameter_dir__ }}/{{ inventory_hostname }}/collected-data.yml"
+  delegate_to: 127.0.0.1

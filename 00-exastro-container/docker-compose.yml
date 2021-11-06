@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  ita-automation:
+    image: exastro/it-automation:1.8.1-ja
+    privileged: true
+    extra_hosts:
+      - "exastro-it-automation:127.0.0.1"
+    ports:  
+      - "8080:80"
+    volumes:
+      - database:/exastro-database-volume
+      - file:/exastro-file-volume
+
+  target:
+    build: ./centos8-with-ssh-server
+    image: centos8-with-ssh-server:1.0.0
+    privileged: true
+
+volumes:
+  database:
+  file:
