@@ -76,9 +76,9 @@ administration-console:
 	$(MAKE) -C 02-administration-console administration-console
 
 
-.PHONY: create-menu
-create-menu:
-	$(MAKE) -C 04-create-menu create-menu
+.PHONY: create-menu-items
+create-menu-items:
+	$(MAKE) -C 04-create-menu-items create-menu-items
 
 
 .PHONY: basic-console

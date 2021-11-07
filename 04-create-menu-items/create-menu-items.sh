@@ -1,6 +1,6 @@
 #!/bin/bash -x
 
 ##############################################################################
-# API実行
+# invoke API
 
-python3 create-menu.py
+python3 create-menu-items.py

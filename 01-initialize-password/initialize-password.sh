@@ -35,7 +35,7 @@ curl \
     --cookie ${EXASTRO_COOKIE_FILE} \
     --cookie-jar ${EXASTRO_COOKIE_FILE} \
     --header 'Referer: '${EXASTRO_URL}'/common/common_auth.php?login&grp=&no=' \
-    --data 'username='${EXASTRO_URL_ENCODED_USERNAME}'&password='${EXASTRO_URL_ENCODED_PASSWORD}'&login=%E3%83%AD%E3%82%B0%E3%82%A4%E3%83%B3' \
+    --data 'username='${EXASTRO_URL_ENCODED_USERNAME}'&password='${EXASTRO_URL_ENCODED_INITIAL_PASSWORD}'&login=%E3%83%AD%E3%82%B0%E3%82%A4%E3%83%B3' \
     ${EXASTRO_URL}'/common/common_auth.php?login&grp=0000000000&no='
 
 curl \

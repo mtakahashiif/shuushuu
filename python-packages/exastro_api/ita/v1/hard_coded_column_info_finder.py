@@ -176,6 +176,24 @@ class HardCodedColumnMetadataFinder:
         return column_names, file_upload_column_names
 
 
+    # Ansible-LegacyRole > ロール名管理
+    def find_2100020304(self):
+        column_names = [
+            "実行処理種別",                     # 0
+            "廃止",                             # 1
+            "項番",                             # 2
+            "ロールパッケージ名",               # 3
+            "ロール名",                         # 4
+            "アクセス権/アクセス許可ロール",    # 5
+            "備考",                             # 6
+            "最終更新日時",                     # 7
+            "更新用の最終更新日時",             # 8
+            "最終更新者"                        # 9
+        ]
+
+        return column_names, []
+
+
     # Ansible-LegacyRole > Movement-ロール紐付
     def find_2100020307(self):
         column_names = [
@@ -192,7 +210,4 @@ class HardCodedColumnMetadataFinder:
             "最終更新者"                        # 10
         ]
 
-        file_upload_column_names = [
-        ]
-
-        return column_names, file_upload_column_names
+        return column_names, []

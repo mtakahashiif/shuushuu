@@ -11,4 +11,4 @@ python3 create-collected-data.py > ${WORKSPACE_DIR}/roles/data_collector/files/c
 ##############################################################################
 # invoke API
 
-python3 ansible-lagacy-role.py
+python3 ansible-legacy-role.py
