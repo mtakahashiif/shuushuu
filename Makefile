@@ -89,3 +89,8 @@ basic-console:
 .PHONY: ansible-legacy-role
 ansible-legacy-role:
 	$(MAKE) -C 07-ansible-legacy-role ansible-legacy-role
+
+
+.PHONY: ansible-common
+ansible-legacy-role:
+	$(MAKE) -C 08-ansible-common ansible-common

@@ -1,5 +1,6 @@
 import os
 import exastro_api.ita.v1 as ita
+import time
 
 from typing import *
 
@@ -67,16 +68,36 @@ class ApiBuilderAnsibleLegacyRoleのMovementロール紐付(ita.ApiBuilder):
         return [
             {
                 '実行処理種別': '登録',
-                "Movement": ita.Query('2100020306', '$[?(@."Movement名"="{}")]."MovementID","Movement名"'.format(params['movement_name'])),
+                "Movement": ita.Query('2100020306', '$[?(@."Movement名"="{}" & @."廃止"!="廃止")]."MovementID","Movement名"'.format(params['movement_name'])),
                 "ロールパッケージ名：ロール名": ita.Join([
-                    ita.Query('2100020303', '$[?(@."ロールパッケージ名"="{}")]."項番","ロールパッケージ名"'.format(params['role_package_name'])),
-                    ita.Query('2100020304', '$[?(@."ロールパッケージ名"="{}" & @."ロール名"="{}")]."項番","ロール名"'.format(params['role_package_name'], params['role_name']))
+                    ita.Query('2100020303', '$[?(@."ロールパッケージ名"="{}" & @."廃止"!="廃止")]."項番","ロールパッケージ名"'.format(params['role_package_name'])),
+                    ita.Query('2100020304', '$[?(@."ロールパッケージ名"="{}" & @."ロール名"="{}" & @."廃止"!="廃止")]."項番","ロール名"'.format(params['role_package_name'], params['role_name']))
                 ]),
                 "インクルード順序": params['role_package_include_order']
             }
         ]
 
+
+class ApiBuilderAnsibleLegacyRoleの作業対象ホスト(ita.ApiBuilder):
+    def __init__(self) -> None:
+        super().__init__('2100020310', 'EDIT')
+
+    def create_entries(self, params: Dict[str, str]) -> Optional[List[Dict[str, str]]]:
+        return [
+            {
+                '実行処理種別': '登録',
+                "オペレーション": ita.Query('2100000304', '$[?(@."オペレーション名"="{}" & @."廃止"!="廃止")]."オペレーションID","オペレーション名"'.format(params['operation_name'])),
+                "Movement": ita.Query('2100020306', '$[?(@."Movement名"="{}" & @."廃止"!="廃止")]."MovementID","Movement名"'.format(params['movement_name'])),
+                "ホスト": ita.Query('2100000303', '$[?(@."ホスト名"="{}" & @."廃止"!="廃止")]."管理システム項番","ホスト名"'.format(params['hostname'])),
+            }
+        ]
+
+
 api_invoker = ita.ApiInvoker(ita.ApiContext())
 api_invoker.invoke(params, ApiBuilderAnsibleLegacyRoleのMovement一覧())
+time.sleep(10)
 api_invoker.invoke(params, ApiBuilderAnsibleLegacyRoleのロールパッケージ管理())
+time.sleep(10)
 api_invoker.invoke(params, ApiBuilderAnsibleLegacyRoleのMovementロール紐付())
+time.sleep(10)
+api_invoker.invoke(params, ApiBuilderAnsibleLegacyRoleの作業対象ホスト())
