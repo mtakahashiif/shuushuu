@@ -19,15 +19,18 @@ class ApiBuilder管理コンソールのロールメニュー紐付管理(ita.Ap
         return [
             {
                 '実行処理種別': '復活',
-                '項番': '2100160002',       # メニュー項目作成情報
+                '項番': '2100160002',                               # メニュー項目作成情報
+                '更新用の最終更新日時': 'T_20150401100000000000'    # WORKAROUND 現時点ではハードコード
             },
             {
                 '実行処理種別': '復活',
-                '項番': '2100160003',       # メニュー作成実行
+                '項番': '2100160003',                               # メニュー作成実行
+                '更新用の最終更新日時': 'T_20150401100000000000'    # WORKAROUND 現時点ではハードコード
             },
             {
                 '実行処理種別': '復活',
-                '項番': '2100020304',       # ロール名管理
+                '項番': '2100020304',                               # ロール名管理
+                '更新用の最終更新日時': 'T_20150401100000000000'    # WORKAROUND 現時点ではハードコード
             }
         ]
 
@@ -189,3 +192,19 @@ class ApiBuilderAnsible共通の収集項目値管理(ita.ApiBuilder):
             })
 
         return entries
+
+
+class ApiBuilderAnsible共通の収集インターフェース情報(ita.ApiBuilder):
+    def __init__(self) -> None:
+        super().__init__('2100040709', 'EDIT')
+
+    def create_entries(self, params: Dict[str, str]) -> Optional[List[Dict[str, str]]]:
+        return [
+            {
+                '実行処理種別': '更新',
+                'ID': '1',
+                'RESTユーザー': params['REST_APIユーザ名'],
+                'RESTパスワード': params['REST_APIパスワード'],
+                '更新用の最終更新日時': 'T_20150401100000000000'
+            }
+        ]

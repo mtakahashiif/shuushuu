@@ -159,6 +159,28 @@ class HardCodedColumnMetadataFinder:
         return column_names, []
 
 
+    # Ansible共通 > 収集インターフェース情報
+    def find_2100040709(self):
+        column_names = [
+            '実行処理種別',                     #  0
+            'ID',                               #  1
+            'ホスト名',                         #  2
+            'IP',                               #  3
+            'RESTユーザー',                     #  4
+            'RESTパスワード',                   #  5
+            'REST方式',                         #  6
+            'プロトコル',                       #  7
+            'ポート',                           #  8
+            'アクセス権/アクセス許可ロール',    #  9
+            '備考',                             # 10
+            '最終更新日時',                     # 11
+            '更新用の最終更新日時',             # 12
+            '最終更新者'                        # 13
+        ]
+
+        return column_names, []
+
+
     # Ansible共通 > 収集項目値管理
     def find_2100040710(self):
         column_names = [

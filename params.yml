@@ -1,7 +1,7 @@
 対象ホストのホスト名: target
 対象ホストのIPアドレス: '0.0.0.0'     # dummy
 対象ホストのログインユーザID: root
-対象ホストのログインパスワード: hogehoge
+対象ホストのログインパスワード: password
 
 オペレーション名: テストoperation
 オペレーションの実施予定日時: 2021/10/30 20:17
@@ -21,3 +21,6 @@ Movementのヘッダセクション: |
 データ収集ロールのzipファイルパス: null
 データ収集ロールのインクルード順序: '1'
 データ収集ロールのロール名: data_collector
+
+REST_APIユーザ名: administrator
+REST_APIパスワード: hogehoge
