@@ -1,0 +1,23 @@
+対象ホストのホスト名: target
+対象ホストのIPアドレス: '0.0.0.0'     # dummy
+対象ホストのログインユーザID: root
+対象ホストのログインパスワード: hogehoge
+
+オペレーション名: テストoperation
+オペレーションの実施予定日時: 2021/10/30 20:17
+
+メニュー名: データ収集メニュー
+
+Movement名: データ収集Movement
+Movementのヘッダセクション: |
+  - hosts: all
+    remote_user: "{{ __loginuser__ }}"
+    gather_facts: yes
+    become: yes
+
+データ収集ロールのパス: roles
+データ収集ロールのパッケージ名: データ収集ロール
+データ収集ロールのzipファイル名: data-collector-roles.zip
+データ収集ロールのzipファイルパス: null
+データ収集ロールのインクルード順序: '1'
+データ収集ロールのロール名: data_collector

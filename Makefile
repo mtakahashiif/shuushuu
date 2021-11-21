@@ -46,23 +46,23 @@ api-filter:
 	./api-filter.sh
 
 
-.PHONY: build-exastro-container
-run-exastro-container:
+.PHONY: build-exastro
+run-exastro:
 	$(MAKE) -C 00-exastro-container build
 
 
-.PHONY: up-exastro-container
-up-exastro-container:
+.PHONY: up-exastro
+up-exastro:
 	$(MAKE) -C 00-exastro-container up
 
 
-.PHONY: down-exastro-container
-down-exastro-container:
+.PHONY: down-exastro
+down-exastro:
 	$(MAKE) -C 00-exastro-container down
 
 
-.PHONY: clean-exastro-container
-clean-exastro-container:
+.PHONY: clean-exastro
+clean-exastro:
 	$(MAKE) -C 00-exastro-container clean
 
 
@@ -78,19 +78,9 @@ administration-console:
 
 .PHONY: create-menu-items
 create-menu-items:
-	$(MAKE) -C 04-create-menu-items create-menu-items
+	python3 -m shuushuu create_menu_items $(CURDIR)/params.yml
 
 
-.PHONY: basic-console
-basic-console:
-	$(MAKE) -C 06-basic-console basic-console
-
-
-.PHONY: ansible-legacy-role
-ansible-legacy-role:
-	$(MAKE) -C 07-ansible-legacy-role ansible-legacy-role
-
-
-.PHONY: ansible-common
-ansible-legacy-role:
-	$(MAKE) -C 08-ansible-common ansible-common
+.PHONY: create-movement
+create-movement:
+	python3 -m shuushuu create_movement $(CURDIR)/params.yml

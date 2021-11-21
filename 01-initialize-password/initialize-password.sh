@@ -21,6 +21,7 @@ EXASTRO_URL_ENCODED_PASSWORD=$(urlencode ${EXASTRO_PASSWORD})
 ##############################################################################
 # initialize password
 
+mkdir -p `dirname $EXASTRO_COOKIE_FILE`
 rm ${EXASTRO_COOKIE_FILE}
 
 curl \

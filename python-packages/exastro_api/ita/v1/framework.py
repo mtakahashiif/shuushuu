@@ -62,8 +62,10 @@ class ApiContext:
         self.port: str = os.environ.get('EXASTRO_PORT', '8080')
         self.username: str = os.environ.get('EXASTRO_USERNAME', 'administrator')
         self.password: str = os.environ.get('EXASTRO_PASSWORD', 'password')
-        self.workspace: str = os.environ.get('WORKSPACE_DIR', 'tmp')
+        self.current_dir: str = os.getcwd()
+        self.workspace: str = os.path.join(self.current_dir, os.environ.get('WORKSPACE_DIR', 'tmp'))
         self.debug: bool = bool(os.environ.get('DEBUG'))
+
 
     def create_api_request(self, menu_id: str) -> ApiRequest:
         return ApiRequest(
@@ -79,8 +81,18 @@ class ApiContext:
             self.password
         )
 
-    def get_workspace_path(self, relative_path: str) -> str:
+
+    def get_path_under_current_dir(self, relative_path: str) -> str:
+        return os.path.join(self.current_dir, relative_path)
+
+
+    def get_path_under_workspace(self, relative_path: str) -> str:
         return os.path.join(self.workspace, relative_path)
+
+    def create_temporary_dir(self, prefix: str) -> str:
+        tmp_dir = self.get_path_under_workspace('{}-{}'.format(prefix, time.time()))
+        os.makedirs(tmp_dir, exist_ok=True)
+        return tmp_dir
 
 
 class ItemValue(ABC):
@@ -303,6 +315,8 @@ class Query(ItemValue):
 
         jsonpath_expr = parse(self.query_string)
         matches = jsonpath_expr.find(converted)
+        # TODO no results handling
+
         values = [match.value for match in matches]
 
         return functools.reduce(lambda x, y: x + self.separator + y, values)
@@ -344,7 +358,10 @@ class ApiInvoker:
 
 
     def __save_to_file(self, index: int, kind: str, builder: ApiBuilder, file_ext: str, data: str) -> None:
-        dir_path = self.api_context.get_workspace_path(self.debug_file_dir)
+        if file_ext == 'json':
+            data = json.dumps(json.loads(data), ensure_ascii=False, indent=4)
+
+        dir_path = self.api_context.get_path_under_workspace(self.debug_file_dir)
         os.makedirs(dir_path, exist_ok=True)
 
         file_path = os.path.join(dir_path, "{:03}-{}-{}.{}".format(index, kind, type(builder).__name__, file_ext))
