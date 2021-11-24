@@ -14,5 +14,6 @@ down:
 
 
 .PHONY: clean
-clean: down
-	echo "TODO: remove volume and target machine image"
+clean: clean
+	docker system prune --force
+	docker volume prune --force

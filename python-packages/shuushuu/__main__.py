@@ -10,6 +10,23 @@ import shuushuu
 import exastro_api.ita.v1 as ita
 
 
+def create_collected_data(output_file_path: str) -> None:
+    values = {
+        '文字列': 'hello',
+        '整数': 10,
+        '浮動小数点': 55.55,
+        'ブーリアン': True,
+        'ヌル': None
+    }
+    
+    yaml_object = {}
+    for column_name, yaml_type, _ in shuushuu.column_name_matrix():
+        yaml_object[column_name] = values[yaml_type]
+
+    with open(output_file_path, 'w') as file:
+        yaml.dump(yaml_object, file, allow_unicode=True, default_flow_style=False, sort_keys=False)
+
+
 class SubCommand:
     def __init__(self) -> None:
         self.api_context = ita.ApiContext()
@@ -29,7 +46,7 @@ class SubCommand:
         api_invoker.invoke(params, shuushuu.ApiBuilderメニュー作成のメニュー項目作成情報())
 
 
-    def create_movement(self, params: Dict[str, str]) -> None:
+    def create_role_package(self, params: Dict[str, str]) -> None:
         # copy roles directory to workspace
         zip_contents_dir = self.api_context.create_temporary_dir('zip-contents')
         roles_path_under_current_dir = self.api_context.get_path_under_current_dir(params['データ収集ロールのパス'])
@@ -38,7 +55,7 @@ class SubCommand:
 
         # create "roles/data_collector/files/collected-data.yml"
         collected_data_file_path = os.path.join(zip_contents_dir, 'roles/data_collector/files/collected-data.yml')
-        shuushuu.create_collected_data(collected_data_file_path)
+        create_collected_data(collected_data_file_path)
 
         # create roles zip file
         zip_file_path_basename = os.path.splitext(self.api_context.get_path_under_workspace(params['データ収集ロールのzipファイル名']))[0]
@@ -46,22 +63,26 @@ class SubCommand:
 
         # set zip file path to params
         params['データ収集ロールのzipファイルパス'] = zip_file_path
+
+
+    def create_movement(self, params: Dict[str, str]) -> None:
+        self.create_role_package(params)
         
         api_invoker = ita.ApiInvoker(self.api_context)
-#        api_invoker.invoke(params, shuushuu.ApiBuilder基本コンソールの機器一覧())
-#        time.sleep(1)
-#        api_invoker.invoke(params, shuushuu.ApiBuilder基本コンソールのオペレーション一覧())
-#        time.sleep(1)
-#        api_invoker.invoke(params, shuushuu.ApiBuilderAnsibleLegacyRoleのMovement一覧())
-#        time.sleep(1)
-#        api_invoker.invoke(params, shuushuu.ApiBuilderAnsibleLegacyRoleのロールパッケージ管理())
-#        time.sleep(10)
-#        api_invoker.invoke(params, shuushuu.ApiBuilderAnsibleLegacyRoleのMovementロール紐付())
-#        time.sleep(1)
-#        api_invoker.invoke(params, shuushuu.ApiBuilderAnsibleLegacyRoleの作業対象ホスト())
-#        time.sleep(1)
-#        api_invoker.invoke(params, shuushuu.ApiBuilderAnsible共通の収集項目値管理())
-#        time.sleep(1)
+        api_invoker.invoke(params, shuushuu.ApiBuilder基本コンソールの機器一覧())
+        time.sleep(1)
+        api_invoker.invoke(params, shuushuu.ApiBuilder基本コンソールのオペレーション一覧())
+        time.sleep(1)
+        api_invoker.invoke(params, shuushuu.ApiBuilderAnsibleLegacyRoleのMovement一覧())
+        time.sleep(1)
+        api_invoker.invoke(params, shuushuu.ApiBuilderAnsibleLegacyRoleのロールパッケージ管理())
+        time.sleep(15)
+        api_invoker.invoke(params, shuushuu.ApiBuilderAnsibleLegacyRoleのMovementロール紐付())
+        time.sleep(1)
+        api_invoker.invoke(params, shuushuu.ApiBuilderAnsibleLegacyRoleの作業対象ホスト())
+        time.sleep(1)
+        api_invoker.invoke(params, shuushuu.ApiBuilderAnsible共通の収集項目値管理())
+        time.sleep(1)
         api_invoker.invoke(params, shuushuu.ApiBuilderAnsible共通の収集インターフェース情報())
 
 

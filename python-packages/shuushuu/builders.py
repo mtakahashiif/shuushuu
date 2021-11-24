@@ -7,7 +7,7 @@ def column_name_matrix() -> Iterator[Tuple[str, str, str]]:
     for yaml_type in ['文字列', '整数', '浮動小数点', 'ブーリアン', 'ヌル']:
 #        for column_type in ['文字列(単一行)', '文字列(複数行)', '整数', '小数', '日時', '日付', 'パスワード', 'リンク']:
         for column_type in ['文字列(単一行)', '文字列(複数行)', '整数', '小数']:
-            yield '{}_to_{}'.format(yaml_type, column_type), yaml_type, column_type
+            yield '{}_to_{}'.format(yaml_type, column_type.translate(str.maketrans('(', '_', ')'))), yaml_type, column_type
 
 
 class ApiBuilder管理コンソールのロールメニュー紐付管理(ita.ApiBuilder):
@@ -170,8 +170,17 @@ class ApiBuilderAnsible共通の収集項目値管理(ita.ApiBuilder):
 
 
     def create_entries(self, params: Dict[str, str]) -> Optional[List[Dict[str, str]]]:
+        excluded_column_names = [
+            '文字列_to_整数',
+            '文字列_to_小数',
+            '浮動小数点_to_整数'
+        ]
+
         entries = []
         for column_name, _, _ in column_name_matrix():
+            if column_name in excluded_column_names:
+                continue
+
             # 項目"パラメータシート(TO)/メニューグループ:メニュー:項目"の具体例は以下。
             #   "2100011611:代入値自動登録用:2:データ収集メニュー:2:パラメータ/文字列_to_文字列(単一行)"
             #

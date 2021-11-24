@@ -66,14 +66,14 @@ clean-exastro:
 	$(MAKE) -C 00-exastro-container clean
 
 
-.PHONY: initialize-password
-initialize-password:
-	$(MAKE) -C 01-initialize-password initialize-password
+.PHONY: init-password
+init-password:
+	./init-password.sh
 
 
-.PHONY: administration-console
-administration-console:
-	$(MAKE) -C 02-administration-console administration-console
+.PHONY: enable-menu
+enable-menu:
+	python3 -m shuushuu enable_menu $(CURDIR)/params.yml
 
 
 .PHONY: create-menu-items
@@ -84,3 +84,8 @@ create-menu-items:
 .PHONY: create-movement
 create-movement:
 	python3 -m shuushuu create_movement $(CURDIR)/params.yml
+
+
+.PHONY: create-role-package
+create-role-package:
+	python3 -m shuushuu create_role_package $(CURDIR)/params.yml
