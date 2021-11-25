@@ -27,6 +27,11 @@ export PYTHONPATH := $(CURDIR)/python-packages
 # docker compose
 export COMPOSE_PROJECT_NAME := shuushuu
 
+# Extra root CA
+ifneq ($(origin EXASTRO_EXTRA_ROOT_CA), undefined)
+export DOCKER_BUILD_OPT_SECRET := --secret id=extra-root-ca,src=$(EXASTRO_EXTRA_ROOT_CA)
+endif
+
 
 ##############################################################################
 # targets
@@ -47,7 +52,7 @@ api-filter:
 
 
 .PHONY: build-exastro
-run-exastro:
+build-exastro:
 	$(MAKE) -C 00-exastro-container build
 
 
