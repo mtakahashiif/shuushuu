@@ -2,7 +2,7 @@ version: "3"
 
 services:
   ita-automation:
-    image: ghcr.io/exastro-suite/it-automation:1.8.2-ja-centos8
+    image: ghcr.io/exastro-suite/it-automation:1.9.0-ja-centos8
     privileged: true
     extra_hosts:
       - "exastro-it-automation:127.0.0.1"
