@@ -36,6 +36,35 @@ class HardCodedColumnMetadataFinder:
         return column_names, []
 
 
+    # 管理コンソール > ユーザ管理
+    def find_2100000208(self):
+        column_names = [
+            '実行処理種別',                     #  0
+            '廃止',                             #  1
+            'ユーザID',                         #  2
+            'ログインID',                       #  3
+            'ログインPW',                       #  4
+            'ユーザ名',                         #  5
+            'メールアドレス',                   #  6
+            'パスワード無期限設定',             #  7
+            '初回パスワード再設定無効',         #  8
+            'PW最終更新日時',                   #  9
+            '最終ログイン日時',                 # 10
+            'PWカウンタ',                       # 11
+            'ロック日時',                       # 12
+            '認証方式',                         # 13
+            '認証プロバイダー',                 # 14
+            '認証プロバイダーユーザーID',       # 15
+            'アクセス権/アクセス許可ロール',    # 16
+            '備考',                             # 17
+            '最終更新日時',                     # 18
+            '更新用の最終更新日時',             # 19
+            '最終更新者'                        # 20
+        ]
+
+        return column_names, []
+
+
     # 管理コンソール > ロール・メニュー紐付管理
     def find_2100000209(self):
         column_names = [
@@ -202,6 +231,90 @@ class HardCodedColumnMetadataFinder:
         return column_names, []
 
 
+    # Ansible-Legacy > Movement一覧
+    def find_2100020103(self):
+        column_names = [
+            '実行処理種別',                             #  0
+            '廃止',                                     #  1
+            'MovementID',                               #  2
+            'Movement名',                               #  3
+            'オーケストレータ',                         #  4
+            '遅延タイマー',                             #  5
+            'Ansible利用情報/ホスト指定形式',           #  6
+            'Ansible利用情報/WinRM接続',                #  7
+            'Ansible利用情報/virtualenv',               #  8
+            'Ansible利用情報/ヘッダーセクション',       #  9
+            'Ansible利用情報/オプションパラメータ',     # 10
+            'アクセス権/アクセス許可ロール',            # 11
+            '備考',                                     # 12
+            '最終更新日時',                             # 13
+            '更新用の最終更新日時',                     # 14
+            '最終更新者'                                # 15
+        ]
+
+        return column_names, []
+
+
+    # Ansible-Legacy > Playbook素材集
+    def find_2100020104(self):
+        column_names = [
+            '実行処理種別',                     # 0
+            '廃止',                             # 1
+            '素材ID',                           # 2
+            'Playbook素材名',                   # 3
+            'Playbook素材',                     # 4
+            'アクセス権/アクセス許可ロール',    # 5
+            '備考',                             # 6
+            '最終更新日時',                     # 7
+            '更新用の最終更新日時',             # 8
+            '最終更新者'                        # 9
+        ]
+
+        file_upload_column_names = [
+            'Playbook素材'
+        ]
+
+        return column_names, file_upload_column_names
+
+
+    # Ansible-Legacy > Movement-Playbook紐付
+    def find_2100020105(self):
+        column_names = [
+            '実行処理種別',                     #  0
+            '廃止',                             #  1
+            '紐付項番',                         #  2
+            'Movement',                         #  3
+            'Playbook素材',                     #  4
+            'インクルード順序',                 #  5
+            'アクセス権/アクセス許可ロール',    #  6
+            '備考',                             #  7
+            '最終更新日時',                     #  8
+            '更新用の最終更新日時',             #  9
+            '最終更新者'                        # 10
+        ]
+
+        return column_names, []
+
+
+    # Ansible-Legacy > Movement-Playbook紐付
+    def find_2100020108(self):
+        column_names = [
+            '実行処理種別',                     #  0
+            '廃止',                             #  1
+            '項番',                             #  2
+            'オペレーション',                   #  3
+            'Movement',                         #  4
+            'ホスト',                           #  5
+            'アクセス権/アクセス許可ロール',    #  6
+            '備考',                             #  7
+            '最終更新日時',                     #  8
+            '更新用の最終更新日時',             #  9
+            '最終更新者'                        # 10
+        ]
+
+        return column_names, []
+
+
     # Ansible-LegacyRole > Movement一覧
     def find_2100020306(self):
         column_names = [
@@ -298,6 +411,92 @@ class HardCodedColumnMetadataFinder:
             '最終更新日時',                     #  8
             '更新用の最終更新日時',             #  9
             '最終更新者'                        # 10
+        ]
+
+        return column_names, []
+
+
+    # CI/CD for IaC > リモートリポジトリ
+    def find_2100120001(self):
+        column_names = [
+            '実行処理種別',                             #  0
+            '廃止',                                     #  1
+            '項番',                                     #  2
+            'リモートリポジトリ名',                     #  3
+            'リモートリポジトリ(URL)',                  #  4
+            'ブランチ',                                 #  5
+            'プロトコル',                               #  6
+            'Visibilityタイプ',                         #  7
+            'Git アカウント情報/ユーザ',                #  8
+            'Git アカウント情報/パスワード',            #  9
+            'ssh接続情報/パスワード',                   # 10
+            'ssh接続情報/パスフレーズ',                 # 11
+            'ssh接続情報/接続パラメータ',               # 12
+            'Proxy/Address',                            # 13
+            'Proxy/Port',                               # 14
+            'リモートリポジトリ同期情報/自動同期',      # 15
+            'リモートリポジトリ同期情報/周期(秒)',      # 16
+            'リモートリポジトリ同期状態/状態',          # 17
+            'リモートリポジトリ同期状態/詳細情報',      # 18
+            '通信リトライ情報/回数',                    # 19
+            '通信リトライ情報/周期(ms)',                # 20
+            'アクセス権/アクセス許可ロール',            # 21
+            '備考',                                     # 22
+            '最終更新日時',                             # 23
+            '更新用の最終更新日時',                     # 24
+            '最終更新者'                                # 25
+        ]
+
+        return column_names, []
+
+
+    # CI/CD for IaC > 登録アカウント
+    def find_2100120005(self):
+        column_names = [
+            '実行処理種別',                                 # 0
+            '廃止',                                         # 1
+            '項番',                                         # 2
+            'Exastro IT Automationアカウント/ログインID',   # 3
+            'Exastro IT Automationアカウント/ログインPW',   # 4
+            'アクセス権/アクセス許可ロール',                # 5
+            '備考',                                         # 6
+            '最終更新日時',                                 # 7
+            '更新用の最終更新日時',                         # 8
+            '最終更新者'                                    # 9
+        ]
+
+        return column_names, []
+
+
+    # CI/CD for IaC > 資材紐付
+    def find_2100120003(self):
+        column_names = [
+            '実行処理種別',                                         #  0
+            '廃止',                                                 #  1
+            '項番',                                                 #  2
+            '紐付先資材名',                                         #  3
+            'Git リポジトリ(From)/資材パス',                        #  4
+            'Exastro IT automation(To)/紐付先資材タイプ',           #  5
+            'Exastro IT automation(To)/テンプレート管理/変数定義',  #  6
+            'Exastro IT automation(To)/Ansible-Pioneer/対話種別',   #  7
+            'Exastro IT automation(To)/Ansible-Pioneer/OS種別',     #  8
+            'Exastro IT automation(To)/実行ログインID',             #  9
+            'Exastro IT automation(To)/アクセス許可ロール付与',     # 10
+            '素材同期情報/自動同期',                                # 11
+            '素材同期情報/状態',                                    # 12
+            '素材同期情報/詳細情報',                                # 13
+            '素材同期情報/最終日時',                                # 14
+            '素材同期情報/最終実行ログインID',                      # 15
+            'デリバリ情報/オペレーション',                          # 16
+            'デリバリ情報/Movement',                                # 17
+            'デリバリ情報/ドライラン',                              # 18
+            'デリバリ情報/詳細情報',                                # 19
+            'デリバリ情報/作業インスタンスNo',                      # 20
+            'アクセス権/アクセス許可ロール',                        # 21
+            '備考',                                                 # 22
+            '最終更新日時',                                         # 23
+            '更新用の最終更新日時',                                 # 24
+            '最終更新者'                                            # 25
         ]
 
         return column_names, []

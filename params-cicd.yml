@@ -1,0 +1,33 @@
+REST_APIユーザ名: administrator
+REST_APIパスワード: hogehoge
+
+対象ホストのホスト名: target
+対象ホストのIPアドレス: '0.0.0.0'     # dummy
+対象ホストのログインユーザID: root
+対象ホストのログインパスワード: password
+
+オペレーション名: テスト用オペレーション
+オペレーションの実施予定日時: 2021/10/30 20:17
+
+Movement名: テスト用Movement
+# 「Ansible Legacy」の由来が不明のため、ハードコードで対応
+Movementのオーケストレータ: Ansible Legacy
+
+Playbook素材名: playbook-httpd
+Playbook素材のファイルパス: playbook-httpd.yml
+Playbookのインクルード順序: 1
+
+Gitリポジトリの名前: テスト用リポジトリ
+GitリポジトリのURL: https://github.com/mtakahashiif/exastro-cicd/
+Gitリポジトリのプロトコル: https
+Gitリポジトリの可視性: public
+Gitリポジトリの同期: 有効
+
+httpdのGit紐付けの名前: httpdのGit紐付け
+httpdのGit紐付けの資材パス: playbook-httpd.yml
+httpdのGit紐付けの資材タイプ: Ansible-Legacyコンソール/Playbook素材集
+httpdのGit紐付けの同期: 有効
+Gitリポジトリの同期の周期: 30
+httpdのGit紐付けのドライランフラグ: ●
+# WORKAOUND ID番号を取得することが困難なのでハードコードで対応
+httpdのGit紐付けの実行ログインID: 1:administrator

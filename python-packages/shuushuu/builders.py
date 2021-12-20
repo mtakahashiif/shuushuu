@@ -39,6 +39,7 @@ class ApiBuilderメニュー作成のメニュー項目作成情報(ita.ApiBuild
     def __init__(self) -> None:
         super().__init__('2100160002', 'EDIT')
 
+
     def create_entries(self, params: Dict[str, str]) -> Optional[List[Dict[str, str]]]:
         entries = []
 
@@ -70,6 +71,7 @@ class ApiBuilderメニュー作成のメニュー項目作成情報(ita.ApiBuild
 class ApiBuilder基本コンソールの機器一覧(ita.ApiBuilder):
     def __init__(self) -> None:
         super().__init__('2100000303', 'EDIT')
+
 
     def create_entries(self, params: Dict[str, str]) -> Optional[List[Dict[str, str]]]:
         return [
@@ -153,6 +155,7 @@ class ApiBuilderAnsibleLegacyRoleの作業対象ホスト(ita.ApiBuilder):
     def __init__(self) -> None:
         super().__init__('2100020310', 'EDIT')
 
+
     def create_entries(self, params: Dict[str, str]) -> Optional[List[Dict[str, str]]]:
         return [
             {
@@ -206,6 +209,7 @@ class ApiBuilderAnsible共通の収集項目値管理(ita.ApiBuilder):
 class ApiBuilderAnsible共通の収集インターフェース情報(ita.ApiBuilder):
     def __init__(self) -> None:
         super().__init__('2100040709', 'EDIT')
+
 
     def create_entries(self, params: Dict[str, str]) -> Optional[List[Dict[str, str]]]:
         return [

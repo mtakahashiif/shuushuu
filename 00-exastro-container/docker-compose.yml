@@ -2,20 +2,35 @@ version: "3.8"
 
 services:
   ita-automation:
-    image: ghcr.io/exastro-suite/it-automation:1.8.2-ja-centos8
+    image: ghcr.io/exastro-suite/it-automation:1.9.0-ja-centos8
     privileged: true
     extra_hosts:
       - "exastro-it-automation:127.0.0.1"
-    ports:  
+    ports:
       - "8080:80"
     volumes:
       - database:/exastro-database-volume
       - file:/exastro-file-volume
-
+    environment:
+      - http_proxy
+      - HTTP_PROXY
+      - https_proxy
+      - HTTPS_PROXY
+      - no_proxy
+      - NO_PROXY
   target:
     build: ./centos8-with-ssh-server
     image: centos8-with-ssh-server:1.0.0
     privileged: true
+    ports:
+      - "80:80"
+    environment:
+      - http_proxy
+      - HTTP_PROXY
+      - https_proxy
+      - HTTPS_PROXY
+      - no_proxy
+      - NO_PROXY
 
 volumes:
   database:

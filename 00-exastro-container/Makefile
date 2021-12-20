@@ -14,6 +14,6 @@ down:
 
 
 .PHONY: clean
-clean: clean
+clean:
 	docker system prune --force
 	docker volume prune --force

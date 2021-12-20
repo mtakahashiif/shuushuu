@@ -46,7 +46,7 @@ class SubCommand:
         api_invoker.invoke(params, shuushuu.ApiBuilderメニュー作成のメニュー項目作成情報())
 
 
-    def create_role_package(self, params: Dict[str, str]) -> None:
+    def __create_role_package(self, params: Dict[str, str]) -> None:
         # copy roles directory to workspace
         zip_contents_dir = self.api_context.create_temporary_dir('zip-contents')
         roles_path_under_current_dir = self.api_context.get_path_under_current_dir(params['データ収集ロールのパス'])
@@ -66,7 +66,7 @@ class SubCommand:
 
 
     def create_movement(self, params: Dict[str, str]) -> None:
-        self.create_role_package(params)
+        self.__create_role_package(params)
         
         api_invoker = ita.ApiInvoker(self.api_context)
         api_invoker.invoke(params, shuushuu.ApiBuilder基本コンソールの機器一覧())

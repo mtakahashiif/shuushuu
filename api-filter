@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 MENU_ID=${MENU_ID:-2100000303}
 

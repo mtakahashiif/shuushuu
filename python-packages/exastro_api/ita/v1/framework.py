@@ -235,6 +235,15 @@ class ApiBuilder:
         return json_object
 
 
+class StrText(ItemValue):
+    def __init__(self, text: str) -> None:
+        self.text: str = text
+
+
+    def to_value(self, api_context: ApiContext) -> str:
+        return self.text
+
+
 class Join(ItemValue):
     def __init__(self, item_values: List[ItemValue], separator: str = ':') -> None:
         self.separator: str = separator
@@ -265,7 +274,7 @@ class Query(ItemValue):
 
         data_object = json.loads(response_json)
 
-        # convert API response to process JSONPath
+        # convert API response to JSONPath friendly form
         #
         # ***** BEFORE *****
         #     {
@@ -332,7 +341,12 @@ class ApiInvoker:
         self.debug_file_dir = 'debug-{}'.format(time.time())
 
 
-    def invoke(self, params: Dict[str, str], builder: ApiBuilder) -> str:
+    def invoke(self, params: Dict[str, str], builder: ApiBuilder, delay: int = 3) -> str:
+        print(builder.__class__.__name__)
+
+        if delay > 0:
+            time.sleep(delay)
+
         request = self.api_context.create_api_request(builder.menu_id)
 
         # DEBUG: save API URL
@@ -340,7 +354,8 @@ class ApiInvoker:
             self.__save_to_file(0, 'api-url', builder, 'txt', request.url)
 
         # create JSON
-        request_body = json.dumps(builder.create_json_object(self.api_context, params))
+        request_body_json_object = builder.create_json_object(self.api_context, params)
+        request_body = json.dumps(request_body_json_object) if request_body_json_object != None else None
 
         # DEBUG: save request JSON
         if self.api_context.debug:
@@ -353,20 +368,25 @@ class ApiInvoker:
         # DEBUG: save response JSON
         if self.api_context.debug:
             self.__save_to_file(2, 'response', builder, 'json', response_body)
+        
 
         return response_body
 
 
-    def __save_to_file(self, index: int, kind: str, builder: ApiBuilder, file_ext: str, data: str) -> None:
-        if file_ext == 'json':
-            data = json.dumps(json.loads(data), ensure_ascii=False, indent=4)
+    def __save_to_file(self, index: int, kind: str, builder: ApiBuilder, file_ext: str, data: Optional[str]) -> None:
+        if data is None:
+            content = '(no contents)'
+        elif file_ext == 'json':
+            content = json.dumps(json.loads(str(data)), ensure_ascii=False, indent=4)
+        else:
+            content = str(data)
 
         dir_path = self.api_context.get_path_under_workspace(self.debug_file_dir)
         os.makedirs(dir_path, exist_ok=True)
 
         file_path = os.path.join(dir_path, "{:03}-{}-{}.{}".format(index, kind, type(builder).__name__, file_ext))
         with open(file_path, mode='w') as f:
-            f.write(data)
+            f.write(content)
 
 
 class SimpleIndexCounter:
