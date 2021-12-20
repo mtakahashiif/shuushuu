@@ -1,3 +1,9 @@
+# Extra root CA
+ifneq ($(origin EXASTRO_EXTRA_ROOT_CA), undefined)
+DOCKER_BUILD_OPT_SECRET := --secret id=extra-root-ca,src=$(EXASTRO_EXTRA_ROOT_CA)
+endif
+
+
 .PHONY: build
 build:
 	DOCKER_BUILDKIT=1 docker build \
