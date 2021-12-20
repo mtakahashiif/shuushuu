@@ -52,7 +52,7 @@ api-filter:
 
 
 .PHONY: build-exastro
-run-exastro:
+build-exastro:
 	$(MAKE) -C 00-exastro-container build
 
 
